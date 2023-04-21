@@ -19,7 +19,7 @@ body {
   width: 100vw;
   height: 100vh;
   font-family: 'Poppins', sans-serif;
-  background-color: #1f1f1f;
+  background-color: #252525;
   color: var(--text-color);
   font-size: 1.6rem;
 }
@@ -108,6 +108,10 @@ main .wrap {
   margin-top: 3rem;
 }
 
+main .wrap table * {
+  font-size: 1.3rem;
+}
+
 main .wrap table img {
   width: 5rem;
   border-radius: 99999px;
@@ -115,22 +119,39 @@ main .wrap table img {
 
 main .wrap table {
   padding: 1rem 2rem;
-  border-collapse: collapse;
   width: 100%;
   max-width: 65rem;
+  border-collapse: collapse;
+}
+
+main .wrap table th:first-child {
+  padding-left: 1rem;
 }
 
 main .wrap table th {
-  outline: 1px solid var(--text-color);
   background: var(--primary-color);
   text-align: left;
-  padding-left: 1rem;
-  font-size: 1.8rem;
+  font-size: 1.6rem;
 }
 
-main .wrap table td {
-  outline: 1px solid var(--text-color);
-  padding: 1rem;
+main .wrap table th:first-child {
+  border-top-left-radius: 0.4rem;
+}
+
+main .wrap table th:last-child {
+  border-top-right-radius: 0.4rem;
+}
+
+main .wrap table td:first-child {
+  padding: 1rem 0 1rem 1rem;
+}
+
+main .wrap table tr {
+  background: #222c43;
+}
+
+main .wrap table tr:nth-child(odd) {
+  background: #181d31;
 }
 
 main .wrap table .user {
@@ -158,5 +179,8 @@ main .wrap table button {
   color: #ff0f0f;
   cursor: pointer;
   border-radius: 50%;
-  font-size: 1.5rem;
+}
+
+main .wrap table button i {
+  font-size: 1.6rem;
 }
