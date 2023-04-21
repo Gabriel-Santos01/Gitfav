@@ -1,11 +1,18 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
   <head>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Git Favorites</title>
     <link rel="shortcut icon" href="./assets/favicon.png" type="image/x-png" />
+    <link rel="stylesheet" href="./style.css" />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
+      rel="stylesheet" />
 
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
     <script src="./app.js" defer></script>
@@ -16,6 +23,7 @@
         <div class="wrap">
           <h1>Github Favorites</h1>
           <div class="search">
+            <label class="sr-only" for="userid">github user name</label>
             <input type="text" id="userid" placeholder="Github user name" />
             <button><i class="ph ph-plus"></i></button>
           </div>
@@ -34,13 +42,20 @@
             </thead>
             <tbody>
               <tr>
-                <td>
+                <td class="user">
                   <img
                     src="https://github.com/Gabriel-Santos01.png"
                     alt="Imagem de Gabriel Santos" />
+                  <a
+                    href="https://github.com/Gabriel-Santos01"
+                    target="_blank"
+                    rel="noopener noreferrer">
+                    <p>Gabriel santos</p>
+                    <span>Gabriel-Santos01</span>
+                  </a>
                 </td>
-                <td></td>
-                <td></td>
+                <td>37</td>
+                <td>20</td>
                 <td>
                   <button><i class="ph ph-x"></i></button>
                 </td>
