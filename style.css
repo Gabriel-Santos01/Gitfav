@@ -132,6 +132,7 @@ main .wrap table th {
   background: var(--primary-color);
   text-align: left;
   font-size: 1.6rem;
+  padding-block: 1rem;
 }
 
 main .wrap table th:first-child {
@@ -140,6 +141,7 @@ main .wrap table th:first-child {
 
 main .wrap table th:last-child {
   border-top-right-radius: 0.4rem;
+  width: 5%;
 }
 
 main .wrap table td:first-child {
