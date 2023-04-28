@@ -48,7 +48,6 @@ header .wrap {
 }
 
 header .wrap h1 {
-  text-transform: uppercase;
   letter-spacing: 2px;
 }
 
@@ -184,5 +183,6 @@ main .wrap table button {
 }
 
 main .wrap table button i {
-  font-size: 1.6rem;
+  font-size: 1.1rem;
+  margin-right: 1rem;
 }

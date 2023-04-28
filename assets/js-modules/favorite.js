@@ -1,34 +1,28 @@
+export class githubUser {
+  static search(username) {
+    const endpoint = `https://api.github.com/users/${username}`
+    return fetch(endpoint)
+      .then(data => data.json())
+      .then(({ login, name, public_repos, followers }) => ({
+        login,
+        name,
+        public_repos,
+        followers
+      }))
+  }
+}
+
 //class que contem toda a logica da aplicação
 export class Favorites {
   constructor(root) {
     this.root = document.querySelector(root)
     this.render()
+
+    githubUser.search('gabrielsantos1101').then(user => {})
   }
 
   render() {
-    this.entries = [
-      {
-        login: 'gabrielSantos1101',
-        name: 'Gabriel Santos',
-        avatar: 'https://github.com/gabrielSantos1101.png',
-        repositories: '38',
-        followers: '20'
-      },
-      {
-        login: 'vhraposo',
-        name: 'Victor Raposo',
-        avatar: 'https://github.com/vhraposo.png',
-        public_repos: '28',
-        followers: '50'
-      },
-      {
-        login: 'valdemirfilho',
-        name: 'Valdemir Filho',
-        avatar: 'https://github.com/valdemirfilho.png',
-        public_repos: '41',
-        followers: '78'
-      }
-    ]
+    this.entries = JSON.parse(localStorage.getItem('@git-fav')) || []
   }
 }
 
@@ -41,6 +35,15 @@ export class FavoritesView extends Favorites {
     this.update()
   }
 
+  onAdd() {
+    const searchButton = this.root.querySelector('search-button')
+    searchButton.onclick = () => {
+      const { value } = this.root.querySelector('#searchUser')
+      console.log('funfa')
+      console.log(value)
+    }
+  }
+
   update() {
     this.removeAllTr()
     this.entries.forEach(user => {
@@ -48,8 +51,21 @@ export class FavoritesView extends Favorites {
       row.querySelector(
         '.user img'
       ).src = `https://github.com/${user.login}.png`
+      row.querySelector('.user img').alt = `foto de perfil de ${user.name}`
+      row.querySelector('.user a p').textContent = user.name
+      row.querySelector('.user a span').textContent = user.login
+      row.querySelector('.user a').href = `https://github.com/${user.login}`
+      row.querySelector('.public-repos').textContent = user.public_repos
+      row.querySelector('.followers').textContent = user.followers
+      row.querySelector('.delete').onclick = () => {
+        const confirm = window.confirm('Tem certeza que deseja excluir?')
+        if (confirm) {
+          this.entries.splice(this.entries.indexOf(user), 1)
+          this.update()
+        }
+      }
 
-      this.tbody.apend(row)
+      this.tbody.append(row)
     })
   }
 
@@ -67,10 +83,10 @@ export class FavoritesView extends Favorites {
                     <span>user id</span>
                   </a>
                 </td>
-                <td>00</td>
-                <td>00</td>
+                <td class="public-repos">00</td>
+                <td class="followers">00</td>
                 <td>
-                  <button><i class="ph ph-x"></i></button>
+                  <button class="delete"><i class="ph ph-x"></i></button>
                 </td>
 `
     return tr
