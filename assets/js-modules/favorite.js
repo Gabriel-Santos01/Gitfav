@@ -1,6 +1,7 @@
-export class githubUser {
+export class GithubUser {
   static search(username) {
     const endpoint = `https://api.github.com/users/${username}`
+
     return fetch(endpoint)
       .then(data => data.json())
       .then(({ login, name, public_repos, followers }) => ({
@@ -16,31 +17,44 @@ export class githubUser {
 export class Favorites {
   constructor(root) {
     this.root = document.querySelector(root)
+    this.main = this.root.querySelector('main .wrap')
+    this.header = this.root.querySelector('header .wrap')
     this.render()
-
-    githubUser.search('gabrielsantos1101').then(user => {})
   }
 
   render() {
-    this.entries = JSON.parse(localStorage.getItem('@git-fav')) || []
+    this.entries = JSON.parse(localStorage.getItem('@github-favorites:')) || []
+  }
+
+  delete(user) {
+    const filteredEntries = this.entries.filter(
+      entry => entry.login !== user.login
+    )
+
+    this.entries = filteredEntries
+    this.update()
   }
 }
 
-//essa class irá criar a os elementos da tabela
-// o extends serve para que a classe seja herdada
+/**
+  This class will create the elements of the table. The 'extends' keyword is used to make the class inheritable.
+  **/
 export class FavoritesView extends Favorites {
   constructor(root) {
     super(root)
-    this.tbody = this.root.querySelector('table tbody')
+    this.tbody = this.main.querySelector('table tbody')
     this.update()
+    this.onAdd()
   }
 
+  /**
+ Attach a click event listener to the search button, and extract the value of the search input .
+ **/
+
   onAdd() {
-    const searchButton = this.root.querySelector('search-button')
+    const searchButton = this.header.querySelector('.search button')
     searchButton.onclick = () => {
-      const { value } = this.root.querySelector('#searchUser')
-      console.log('funfa')
-      console.log(value)
+      const { value } = this.header.querySelector('.search #searchUser')
     }
   }
 
@@ -91,6 +105,10 @@ export class FavoritesView extends Favorites {
 `
     return tr
   }
+
+  /*
+ Removes all the rows on the table from the tbody.
+ */
 
   removeAllTr() {
     this.tbody.querySelectorAll('tr').forEach(tr => {
