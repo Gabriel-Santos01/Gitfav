@@ -25,6 +25,24 @@ export class Favorites {
   render() {
     this.entries = JSON.parse(localStorage.getItem('@github-favorites:')) || []
   }
+  save() {
+    localStorage.setItem('@github-favorites:', JSON.stringify(this.entries))
+  }
+
+  async add(username) {
+    try {
+      const user = await GithubUser.search(username)
+      if (user.login === undefined) {
+        throw new error('Usuário não encontrado!')
+      }
+      console.log(user)
+      this.entries = [user, ...this.entries]
+      this.update()
+      this.save()
+    } catch (error) {
+      alert(error.message)
+    }
+  }
 
   delete(user) {
     const filteredEntries = this.entries.filter(
@@ -55,6 +73,7 @@ export class FavoritesView extends Favorites {
     const searchButton = this.header.querySelector('.search button')
     searchButton.onclick = () => {
       const { value } = this.header.querySelector('.search #searchUser')
+      this.add(value)
     }
   }
 
@@ -67,7 +86,7 @@ export class FavoritesView extends Favorites {
       ).src = `https://github.com/${user.login}.png`
       row.querySelector('.user img').alt = `foto de perfil de ${user.name}`
       row.querySelector('.user a p').textContent = user.name
-      row.querySelector('.user a span').textContent = user.login
+      row.querySelector('.user a span').textContent = `/${user.login}`
       row.querySelector('.user a').href = `https://github.com/${user.login}`
       row.querySelector('.public-repos').textContent = user.public_repos
       row.querySelector('.followers').textContent = user.followers
@@ -100,7 +119,7 @@ export class FavoritesView extends Favorites {
                 <td class="public-repos">00</td>
                 <td class="followers">00</td>
                 <td>
-                  <button class="delete"><i class="ph ph-x"></i></button>
+                  <button class="delete"><i class="ph ph-trash"></i></button>
                 </td>
 `
     return tr

@@ -122,6 +122,11 @@ main .wrap table * {
   font-size: 1.3rem;
 }
 
+main .wrap table tbody {
+  border: 1px solid var(--primary-color);
+  border-top: none;
+}
+
 main .wrap table img {
   width: 5rem;
   border-radius: 99999px;
@@ -198,7 +203,23 @@ main .wrap table button i {
   margin-right: 1rem;
 }
 
+/* @media (min-width: 700px) {
+  main .wrap table {
+    
+  }
+} */
+
 /* ============== Animations ============== */
+.logo .logoIcon {
+  animation: fadeLogo 2.4s ease-in-out forwards;
+  opacity: 0;
+}
+
+@keyframes fadeLogo {
+  100% {
+    opacity: 1;
+  }
+}
 
 @-webkit-keyframes animate-svg-fill-1 {
   0% {
