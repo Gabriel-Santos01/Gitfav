@@ -54,7 +54,7 @@ header .wrap {
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  max-width: 65rem;
+  max-width: 80rem;
   margin-inline: auto;
 }
 
@@ -78,6 +78,14 @@ header .wrap .sr-only {
 header .wrap .search {
   display: flex;
   height: 3rem;
+}
+
+header .wrap .search button .ph-star {
+  display: none;
+}
+
+header .wrap .search button p {
+  display: none;
 }
 
 header .wrap button {
@@ -114,17 +122,34 @@ main {
 main .wrap {
   display: flex;
   justify-content: center;
-  align-items: center;
-  margin-top: 3rem;
+  align-items: flex-start;
+
+  position: relative;
+  margin-top: 7rem;
+  margin-inline: auto;
+
+  width: 100%;
+  max-width: 80rem;
+  max-height: 53.5rem;
+  min-height: 30rem;
+  height: 100%;
+
+  overflow-x: hidden;
+  overflow-y: overlay;
+
+  border: 1px solid var(--primary-color);
+  border-top: none;
+  border-radius: 0.5rem;
+  background: #212a3e;
 }
 
 main .wrap table * {
   font-size: 1.3rem;
 }
 
-main .wrap table tbody {
-  border: 1px solid var(--primary-color);
-  border-top: none;
+main .wrap table thead tr {
+  position: sticky;
+  top: 0;
 }
 
 main .wrap table img {
@@ -135,8 +160,24 @@ main .wrap table img {
 main .wrap table {
   padding: 1rem 2rem;
   width: 100%;
-  max-width: 65rem;
   border-collapse: collapse;
+}
+
+main .wrap .noFavorites {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3rem;
+  position: absolute;
+  text-align: center;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+main .wrap .noFavorites img {
+  width: 8rem;
 }
 
 main .wrap table th:first-child {
@@ -192,7 +233,7 @@ main .wrap table .user a {
 main .wrap table button {
   background: none;
   border: none;
-  margin-left: 1.2rem;
+  margin-inline: 2rem;
   color: #ff0f0f;
   cursor: pointer;
   border-radius: 50%;
@@ -200,26 +241,66 @@ main .wrap table button {
 
 main .wrap table button i {
   font-size: 1.1rem;
-  margin-right: 1rem;
+  /* margin-right: 3rem; */
 }
 
-/* @media (min-width: 700px) {
-  main .wrap table {
-    
+@media (min-width: 700px) {
+  header .wrap .search {
+    width: 100%;
+    max-width: 40rem;
   }
-} */
+
+  header .wrap .search #searchUser {
+    border-radius: 0.4rem;
+    width: 100%;
+    max-width: 30rem;
+  }
+
+  header .wrap .search button {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    width: 11rem;
+    border-radius: 0.4rem;
+    padding-inline: 2rem;
+    animation: teste 2s ease-in-out forwards;
+  }
+
+  header .wrap .search {
+    gap: 1rem;
+  }
+
+  header .wrap .search button .ph-plus {
+    display: none;
+  }
+
+  header .wrap .search button .ph-star {
+    display: block;
+  }
+
+  header .wrap .search button p {
+    display: block;
+    text-transform: uppercase;
+  }
+}
+
+/* ============== Scrolls ============== */
+main .wrap::-webkit-scrollbar {
+  width: 2rem;
+}
+
+main .wrap::-webkit-scrollbar-track {
+  margin-block-start: 4.4rem;
+}
+
+main .wrap::-webkit-scrollbar-thumb {
+  box-shadow: inset 0 0 1rem 1rem var(--primary-color);
+  border: solid 7px transparent;
+  border-radius: 2rem;
+  background-clip: padding-box;
+}
 
 /* ============== Animations ============== */
-.logo .logoIcon {
-  animation: fadeLogo 2.4s ease-in-out forwards;
-  opacity: 0;
-}
-
-@keyframes fadeLogo {
-  100% {
-    opacity: 1;
-  }
-}
 
 @-webkit-keyframes animate-svg-fill-1 {
   0% {
@@ -227,7 +308,7 @@ main .wrap table button i {
   }
 
   100% {
-    fill: rgb(var(--svg-path-color));
+    fill: rgb(255, 255, 255);
   }
 }
 
@@ -237,7 +318,7 @@ main .wrap table button i {
   }
 
   100% {
-    fill: rgb(var(--svg-path-color));
+    fill: rgb(255, 255, 255);
   }
 }
 
@@ -254,7 +335,7 @@ main .wrap table button i {
   }
 
   100% {
-    fill: rgb(var(--svg-path-color));
+    fill: rgb(255, 255, 255);
   }
 }
 
@@ -264,7 +345,7 @@ main .wrap table button i {
   }
 
   100% {
-    fill: rgb(var(--svg-path-color));
+    fill: rgb(255, 255, 255);
   }
 }
 
@@ -281,7 +362,7 @@ main .wrap table button i {
   }
 
   100% {
-    fill: rgb(var(--svg-path-color));
+    fill: rgb(255, 255, 255);
   }
 }
 
@@ -291,7 +372,7 @@ main .wrap table button i {
   }
 
   100% {
-    fill: rgb(var(--svg-path-color));
+    fill: rgb(255, 255, 255);
   }
 }
 
@@ -307,7 +388,7 @@ main .wrap table button i {
   }
 
   100% {
-    fill: rgb(var(--svg-path-color));
+    fill: rgb(255, 255, 255);
   }
 }
 
@@ -317,7 +398,7 @@ main .wrap table button i {
   }
 
   100% {
-    fill: rgb(var(--svg-path-color));
+    fill: rgb(255, 255, 255);
   }
 }
 
@@ -334,7 +415,7 @@ main .wrap table button i {
   }
 
   100% {
-    fill: rgb(var(--svg-path-color));
+    fill: rgb(255, 255, 255);
   }
 }
 
@@ -344,7 +425,7 @@ main .wrap table button i {
   }
 
   100% {
-    fill: rgb(var(--svg-path-color));
+    fill: rgb(255, 255, 255);
   }
 }
 
@@ -361,7 +442,7 @@ main .wrap table button i {
   }
 
   100% {
-    fill: rgb(var(--svg-path-color));
+    fill: rgb(255, 255, 255);
   }
 }
 
@@ -371,7 +452,7 @@ main .wrap table button i {
   }
 
   100% {
-    fill: rgb(var(--svg-path-color));
+    fill: rgb(255, 255, 255);
   }
 }
 
@@ -379,5 +460,86 @@ main .wrap table button i {
   -webkit-animation: animate-svg-fill-6 0.7s cubic-bezier(0.47, 0, 0.745, 0.715)
     1.3s both;
   animation: animate-svg-fill-6 0.7s cubic-bezier(0.47, 0, 0.745, 0.715) 1.3s
+    both;
+}
+
+@-webkit-keyframes animate-svg-fill-7 {
+  0% {
+    fill: transparent;
+  }
+
+  100% {
+    fill: rgb(255, 255, 255);
+  }
+}
+
+@keyframes animate-svg-fill-7 {
+  0% {
+    fill: transparent;
+  }
+
+  100% {
+    fill: rgb(255, 255, 255);
+  }
+}
+
+.svg-elem-7 {
+  -webkit-animation: animate-svg-fill-7 0.7s cubic-bezier(0.47, 0, 0.745, 0.715)
+    1.4000000000000001s both;
+  animation: animate-svg-fill-7 0.7s cubic-bezier(0.47, 0, 0.745, 0.715)
+    1.4000000000000001s both;
+}
+
+@-webkit-keyframes animate-svg-fill-8 {
+  0% {
+    fill: transparent;
+  }
+
+  100% {
+    fill: rgb(255, 255, 255);
+  }
+}
+
+@keyframes animate-svg-fill-8 {
+  0% {
+    fill: transparent;
+  }
+
+  100% {
+    fill: rgb(255, 255, 255);
+  }
+}
+
+.svg-elem-8 {
+  -webkit-animation: animate-svg-fill-8 0.7s cubic-bezier(0.47, 0, 0.745, 0.715)
+    1.5s both;
+  animation: animate-svg-fill-8 0.7s cubic-bezier(0.47, 0, 0.745, 0.715) 1.5s
+    both;
+}
+
+@-webkit-keyframes animate-svg-fill-9 {
+  0% {
+    fill: transparent;
+  }
+
+  100% {
+    fill: rgb(255, 255, 255);
+  }
+}
+
+@keyframes animate-svg-fill-9 {
+  0% {
+    fill: transparent;
+  }
+
+  100% {
+    fill: rgb(255, 255, 255);
+  }
+}
+
+.svg-elem-9 {
+  -webkit-animation: animate-svg-fill-9 0.7s cubic-bezier(0.47, 0, 0.745, 0.715)
+    1.6s both;
+  animation: animate-svg-fill-9 0.7s cubic-bezier(0.47, 0, 0.745, 0.715) 1.6s
     both;
 }
