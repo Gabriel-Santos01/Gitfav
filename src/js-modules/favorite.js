@@ -31,17 +31,20 @@ export class Favorites {
 
   async add(username) {
     try {
+      const userValidate = this.entries.find(entry => entry.login !== username)
+      if (userValidate) {
+        throw new Error('User alredy exists')
+      }
       const user = await GithubUser.search(username)
       if (user.login === undefined) {
-        throw new error('Usuário não encontrado!')
+        throw new error('User not fold!')
       }
       this.entries = [user, ...this.entries]
       this.update()
       this.save()
     } catch (error) {
-      // alert(error.message)
       Toastify({
-        text: 'Insert a github user name',
+        text: `${error.message}`,
         duration: 1500,
         className: 'info',
         style: {
@@ -89,12 +92,12 @@ export class FavoritesView extends Favorites {
       .querySelector('.search #searchUser')
       .addEventListener('keydown', event => {
         if (event.key === 'Enter') {
-          this.add(input.value)
+          this.add(input.value.toLowerCase())
           input.value = ''
         }
       })
     searchButton.onclick = () => {
-      this.add(input.value)
+      this.add(input.value.toLowerCase())
       input.value = ''
     }
   }
