@@ -39,7 +39,16 @@ export class Favorites {
       this.update()
       this.save()
     } catch (error) {
-      alert(error.message)
+      // alert(error.message)
+      Toastify({
+        text: 'Insert a github user name',
+        duration: 1500,
+        className: 'info',
+        style: {
+          background: '#FF6969',
+          borderRadius: '8px'
+        }
+      }).showToast()
     }
   }
 
@@ -76,12 +85,14 @@ export class FavoritesView extends Favorites {
     // const { value } = this.header.querySelector('.search #searchUser')
     // The method above is destructuring the value of the input
 
-    document.addEventListener('keydown', event => {
-      if (event.key === 'Enter') {
-        this.add(input.value)
-        input.value = ''
-      }
-    })
+    this.header
+      .querySelector('.search #searchUser')
+      .addEventListener('keydown', event => {
+        if (event.key === 'Enter') {
+          this.add(input.value)
+          input.value = ''
+        }
+      })
     searchButton.onclick = () => {
       this.add(input.value)
       input.value = ''
