@@ -35,7 +35,6 @@ export class Favorites {
       if (user.login === undefined) {
         throw new error('Usuário não encontrado!')
       }
-      console.log(user)
       this.entries = [user, ...this.entries]
       this.update()
       this.save()
@@ -51,6 +50,8 @@ export class Favorites {
 
     this.entries = filteredEntries
     this.update()
+    this.save()
+    this.noFavorites()
   }
 }
 
@@ -71,9 +72,19 @@ export class FavoritesView extends Favorites {
 
   onAdd() {
     const searchButton = this.header.querySelector('.search button')
+    const input = this.header.querySelector('.search #searchUser')
+    // const { value } = this.header.querySelector('.search #searchUser')
+    // The method above is destructuring the value of the input
+
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Enter') {
+        this.add(input.value)
+        input.value = ''
+      }
+    })
     searchButton.onclick = () => {
-      const { value } = this.header.querySelector('.search #searchUser')
-      this.add(value)
+      this.add(input.value)
+      input.value = ''
     }
   }
 
@@ -93,13 +104,22 @@ export class FavoritesView extends Favorites {
       row.querySelector('.delete').onclick = () => {
         const confirm = window.confirm('Tem certeza que deseja excluir?')
         if (confirm) {
-          this.entries.splice(this.entries.indexOf(user), 1)
-          this.update()
+          // this.entries.splice(this.entries.indexOf(user), 1)
+          this.delete(user)
         }
       }
 
       this.tbody.append(row)
+      this.noFavorites()
     })
+  }
+
+  noFavorites() {
+    if (this.entries.length === 0) {
+      this.main.querySelector('.noFavorites').style.display = 'flex'
+    } else {
+      this.main.querySelector('.noFavorites').style.display = 'none'
+    }
   }
 
   createRow() {
