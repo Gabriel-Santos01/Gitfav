@@ -31,13 +31,15 @@ export class Favorites {
 
   async add(username) {
     try {
-      const userValidate = this.entries.find(entry => entry.login !== username)
+      let userValidate = this.entries.find(
+        entry => entry.login.toLowerCase() === username.toLowerCase()
+      )
       if (userValidate) {
         throw new Error('User alredy exists')
       }
       const user = await GithubUser.search(username)
       if (user.login === undefined) {
-        throw new error('User not fold!')
+        throw new Error('User not found!')
       }
       this.entries = [user, ...this.entries]
       this.update()
