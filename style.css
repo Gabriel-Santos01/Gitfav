@@ -135,7 +135,7 @@ main .wrap {
   height: 100%;
 
   overflow-x: hidden;
-  overflow-y: overlay;
+  scrollbar-gutter: stable both-edges;
 
   border: 1px solid var(--primary-color);
   border-top: none;
